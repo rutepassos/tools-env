@@ -34,3 +34,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc
 
 #  insominia
 sudo snap install insomnia -y
+
+# ajustes de tema do ubuntu
+#sudo apt install gnome-tweaks -y
+#sudo apt install gnome-shell-extensions -y
