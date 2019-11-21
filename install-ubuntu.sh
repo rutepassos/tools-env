@@ -1,6 +1,10 @@
 sudo apt install curl -y
 sudo apt install snapd -y
+
+# vscode
 sudo snap install --classic code
+
+# docker
 sudo apt-get install \
     apt-transport-https \
     ca-certificates \
@@ -13,9 +17,20 @@ sudo add-apt-repository \
    stable"
 sudo apt-get update
 sudo apt-get install docker-ce -y
+
+# config docker
 sudo usermod -aG docker $USER
 sudo systemctl enable docker
+
+# docker compose
 sudo apt install docker-compose -y
+
+# zsh
 sudo apt install zsh -y
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+# plugin zsg
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
+
+#  insominia
+sudo snap install insomnia -y
