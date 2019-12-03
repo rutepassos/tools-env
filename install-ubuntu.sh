@@ -1,5 +1,7 @@
 sudo apt update
 
+sudo apt install git -y
+
 sudo apt install \
     apt-transport-https \
     ca-certificates \
@@ -51,7 +53,6 @@ sudo add-apt-repository \
    stable"
    
 sudo apt update
-sudo apt install git -y
 
 sudo apt install docker-ce -y
 
