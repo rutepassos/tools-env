@@ -42,7 +42,3 @@ sudo apt install postgresql-contrib -y
 sudo usermod -aG docker $USER
 sudo systemctl enable docker
 reboot
-
-# ajustes de tema do ubuntu
-#sudo apt install gnome-tweaks -y
-#sudo apt install gnome-shell-extensions -y
