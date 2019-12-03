@@ -35,6 +35,9 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc
 #  insominia
 sudo snap install insomnia -y
 
+#  client postgres
+sudo apt install postgresql-contrib -y
+
 # config docker
 sudo usermod -aG docker $USER
 sudo systemctl enable docker
