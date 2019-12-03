@@ -10,17 +10,17 @@ sudo apt-get install \
     ca-certificates \
     curl \
     software-properties-common
+
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) \
    stable"
+   
 sudo apt-get update
-sudo apt-get install docker-ce -y
+sudo apt-get install git -y
 
-# config docker
-sudo usermod -aG docker $USER
-sudo systemctl enable docker
+sudo apt-get install docker-ce -y
 
 # docker compose
 sudo apt install docker-compose -y
@@ -34,6 +34,11 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc
 
 #  insominia
 sudo snap install insomnia -y
+
+# config docker
+sudo usermod -aG docker $USER
+sudo systemctl enable docker
+reboot
 
 # ajustes de tema do ubuntu
 #sudo apt install gnome-tweaks -y
