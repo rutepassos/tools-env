@@ -91,7 +91,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
 fi
 
 
-echo '##########  Executando Configuração Dcoker Pós Instalação ############'
+echo '##########  Executando Configuração Docker Pós Instalação ############'
 sudo usermod -aG docker $USER
 sudo systemctl enable docker
 
