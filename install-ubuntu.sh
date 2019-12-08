@@ -75,6 +75,10 @@ fi
 #wget https://downloads.mongodb.com/compass/mongodb-compass_1.15.1_amd64.deb
 #sudo dpkg -i mongodb-compass_1.15.1_amd64.deb
 
+echo '##########  Instalando Git Kraken ############'
+wget https://release.gitkraken.com/linux/gitkraken-amd64.deb
+dpkg -i gitkraken-amd64.deb
+
 echo '##########  Instalando Docker ############'
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository \
