@@ -34,7 +34,7 @@ echo '##########  Instalando ZSH ############'
 sudo apt install zsh -y
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-echo '##########  Instalando Plugin ZSH ############'
+echo '##########  Instalando Plugin ZPLUGIN ############'
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
 
 echo '##########  Instalando Insomnia ############'
