@@ -105,6 +105,13 @@ fi
     #exit 1
 #fi
 
+echo '##########  Instalando Oh my zsh ############'
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+echo '##########  Instalando Plugin ZPLUGIN ############'
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
+
+
 if ! [ -x "$(command -v docker)" ]; then
     echo '##########  Instalando Docker ############'
     sudo apt update
@@ -112,26 +119,17 @@ if ! [ -x "$(command -v docker)" ]; then
     sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(bionic) stable"
     sudo apt update
     sudo apt-get install docker-ce docker-ce-cli containerd.io -y
+    if ! [ -x "$(command -v docker-compose)" ]; then
+      echo '##########  Instalando Dcoker Compose ############'
+      sudo apt install docker-compose -y
+      exit 1
+    fi
+    
+    echo '##########  Executando Configuração Docker Pós Instalação ############'
+    sudo usermod -aG docker $USER
+    sudo systemctl enable docker
+
+    echo '##########  Reiniciando a Máquina ############'
+    reboot
   exit 1
 fi
-
-if ! [ -x "$(command -v docker-compose)" ]; then
-  echo '##########  Instalando Dcoker Compose ############'
-  sudo apt install docker-compose -y
-  exit 1
-fi
-
-
-echo '##########  Executando Configuração Docker Pós Instalação ############'
-sudo usermod -aG docker $USER
-sudo systemctl enable docker
-
-
-echo '##########  Instalando Oh my zsh ############'
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
-echo '##########  Instalando Plugin ZPLUGIN ############'
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
-
-echo '##########  Reiniciando a Máquina ############'
-reboot
