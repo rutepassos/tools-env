@@ -45,7 +45,7 @@ fi
 
 if ! [ -x "$(command -v insomnia)" ]; then
     echo '##########  Instalando Insomnia ############'
-    sudo snap install insomnia -y
+    sudo snap install insomnia
   exit 1
 fi
 
@@ -79,11 +79,11 @@ if ! [ -x "$(command -v npm)" ]; then
   exit 1
 fi
 
-if ! [ -x "$(command -v mysql-workbench)" ]; then
-    echo '##########  Instalando Mysql Workbench ############'
-    sudo apt install mysql-workbench
-  exit 1
-fi
+#if ! [ -x "$(command -v mysql-workbench)" ]; then
+    #echo '##########  Instalando Mysql Workbench ############'
+    #sudo apt install mysql-workbench
+    #exit 1
+#fi
 
 
 # client mongo terminal
@@ -98,20 +98,18 @@ fi
 #wget https://downloads.mongodb.com/compass/mongodb-compass_1.15.1_amd64.deb
 #sudo dpkg -i mongodb-compass_1.15.1_amd64.deb
 
-if ! [ -x "$(command -v gitkraken)" ]; then
-    echo '##########  Instalando Git Kraken ############'
-    wget https://release.gitkraken.com/linux/gitkraken-amd64.deb
-    dpkg -i gitkraken-amd64.deb
-  exit 1
-fi
+#if ! [ -x "$(command -v gitkraken)" ]; then
+    #echo '##########  Instalando Git Kraken ############'
+    #wget https://release.gitkraken.com/linux/gitkraken-amd64.deb
+    #dpkg -i gitkraken-amd64.deb
+    #exit 1
+#fi
 
 if ! [ -x "$(command -v docker)" ]; then
     echo '##########  Instalando Docker ############'
+    sudo apt update
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-    sudo add-apt-repository \
-    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-    $(bionic) \
-    stable"
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(bionic) stable"
     sudo apt update
     sudo apt-get install docker-ce docker-ce-cli containerd.io -y
   exit 1
