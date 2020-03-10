@@ -23,15 +23,15 @@ if ! [ -x "$(command -v code)" ]; then
   sudo snap install --classic code
 fi
 
-# if ! [ -x "$(command -v subl)" ]; then
-#     echo '##########  Instalando Sublime ############'
-#     curl -fsSL https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-#     sudo add-apt-repository "deb https://download.sublimetext.com/ apt/stable/"
-#     sudo apt update
-#     sudo apt install sublime-text
+if ! [ -x "$(command -v subl)" ]; then
+    echo '##########  Instalando Sublime ############'
+    curl -fsSL https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+    sudo add-apt-repository "deb https://download.sublimetext.com/ apt/stable/"
+    sudo apt-get update
+    sudo apt-get install sublime-text
 #     # Abrir sublime pelo terminal
 #     #sudo ln -s /opt/sublime/sublime_text /usr/bin/subl
-# fi
+fi
 
 if ! [ -x "$(command -v insomnia)" ]; then
     echo '##########  Instalando Insomnia ############'
@@ -48,6 +48,10 @@ if ! [ -x "$(command -v node)" ]; then
   sudo apt-get install nodejs -y
 fi
 
+if ! [ -x "$(command -v npm)" ]; then
+  echo '##########  Instalando NPM ############'
+  sudo apt install npm -y
+fi
 
 if ! [ -x "$(command -v yarn)" ]; then
     echo '##########  Instalando Yarn ############'
@@ -60,11 +64,6 @@ fi
 if ! [ -x "$(command -v filezilla)" ]; then
   echo '##########  Instalando Filezilla ############'
   sudo apt-get install filezilla -y
-fi
-
-if ! [ -x "$(command -v npm)" ]; then
-  echo '##########  Instalando NPM ############'
-  sudo apt install npm -y
 fi
 
 # if ! [ -x "$(command -v mysql-workbench)" ]; then
@@ -117,8 +116,8 @@ if ! [ -x "$(command -v zsh)" ]; then
     echo '##########  Instalando Oh my zsh ############'
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-    echo '##########  Instalando Plugin ZPLUGIN ############'
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
+    #echo '##########  Instalando Plugin ZPLUGIN ############'
+    #sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
 fi
 
 echo '##########  Reinicie a Máquina ############'
