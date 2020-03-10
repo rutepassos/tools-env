@@ -1,13 +1,13 @@
 echo '##########  Executando Update ############'
-sudo apt update
+sudo apt-get update
 
 if ! [ -x "$(command -v git)" ]; then
   echo '##########  Instalando Git ############'
-  sudo apt install git -y
+  sudo apt-get install git -y
 fi
 
 echo '##########  Instalando Dependencias ############'
-sudo apt install \
+sudo apt-get install \
     apt-transport-https \
     ca-certificates \
     curl \
@@ -15,7 +15,7 @@ sudo apt install \
 
 if ! [ -x "$(command -v snap)" ]; then
   echo '##########  Instalando Snap ############'
-  sudo apt install snapd -y
+  sudo apt-get install snapd -y
 fi
 
 if ! [ -x "$(command -v code)" ]; then
@@ -40,12 +40,12 @@ fi
 
 if ! [ -x "$(command -v psql)" ]; then
     echo '##########  Instalando Postgres Client ############'
-    sudo apt install postgresql-contrib -y
+    sudo apt-get install postgresql-contrib -y
 fi
 
 if ! [ -x "$(command -v node)" ]; then
   echo '##########  Instalando Node ############'
-  sudo apt install nodejs
+  sudo apt-get install nodejs -y
 fi
 
 
@@ -53,18 +53,18 @@ if ! [ -x "$(command -v yarn)" ]; then
     echo '##########  Instalando Yarn ############'
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-    sudo apt update && sudo apt install --no-install-recommends yarn
+    sudo apt-get update && sudo apt-get install --no-install-recommends yarn -y
 fi
 
 
 if ! [ -x "$(command -v filezilla)" ]; then
   echo '##########  Instalando Filezilla ############'
-  sudo apt-get install filezilla 
+  sudo apt-get install filezilla -y
 fi
 
 if ! [ -x "$(command -v npm)" ]; then
   echo '##########  Instalando NPM ############'
-  sudo apt install npm
+  sudo apt install npm -y
 fi
 
 # if ! [ -x "$(command -v mysql-workbench)" ]; then
@@ -97,12 +97,12 @@ if ! [ -x "$(command -v docker)" ]; then
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
     sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
     
-    sudo apt update
+    sudo apt-get update
     sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 
     if ! [ -x "$(command -v docker-compose)" ]; then
       echo '##########  Instalando Dcoker Compose ############'
-      sudo apt install docker-compose -y
+      sudo apt-get install docker-compose -y
     fi
     
     echo '##########  Executando Configuração Docker Pós Instalação ############'
@@ -112,7 +112,7 @@ fi
 
 if ! [ -x "$(command -v zsh)" ]; then
     echo '##########  Instalando ZSH ############'
-    sudo apt install zsh -y
+    sudo apt-get install zsh -y
 
     echo '##########  Instalando Oh my zsh ############'
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
