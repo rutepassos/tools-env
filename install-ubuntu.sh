@@ -109,6 +109,16 @@ if ! [ -x "$(command -v docker)" ]; then
     sudo systemctl enable docker
 fi
 
+if ! [ -x "$(command -v composer)" ]; then
+  echo '##########  Instalando Composer ############'
+  sudo apt install php-cli php-xml php-gd php-curl php-pgsql php-mysql php-zip  php-mbstring unzip -y
+  php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+  HASH="$(wget -q -O - https://composer.github.io/installer.sig)"
+  php -r "if (hash_file('SHA384', 'composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+  sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+fi
+
+
 if ! [ -x "$(command -v zsh)" ]; then
     echo '##########  Instalando ZSH ############'
     sudo apt-get install zsh -y
