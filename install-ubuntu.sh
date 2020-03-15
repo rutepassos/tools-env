@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo '##########  Executando Update ############'
 sudo apt-get update
 
@@ -6,12 +8,42 @@ if ! [ -x "$(command -v git)" ]; then
   sudo apt-get install git -y
 fi
 
+if [ -x "$(command -v git)" ]; then
+  echo 'Add config global git? 1 - Yes or 2 - No'
+  read CONFIG_GIT
+  if [ $CONFIG_GIT == 1 ] 
+  then 
+      echo "Please, enter with user"
+      read USER_GIT
+      git config --global user.name "${USER_GIT}"
+      
+      echo "Please, enter with e-mail"
+      read EMAIL_GIT
+      git config --global user.email "${EMAIL_GIT}"
+  fi
+fi
+
+echo "Generate ssh key? 1 - Yes or 2 - No"
+read KEY_SSH
+
+if [ $KEY_SSH == 1 ] 
+then 
+    echo "Please, enter with you e-mail"
+    read EMAIL_SSH
+    ssh-keygen -t rsa -b 4096 -C "${EMAIL_SSH}"
+fi
+
 echo '##########  Instalando Dependencias ############'
-sudo apt-get install \
+sudo apt-get install -y \
     apt-transport-https \
     ca-certificates \
     curl \
     software-properties-common
+
+if ! [ -x "$(command -v vim)" ]; then
+  echo '##########  Instalando Vim ############'
+  sudo apt-get install vim -y
+fi
 
 if ! [ -x "$(command -v snap)" ]; then
   echo '##########  Instalando Snap ############'
@@ -117,7 +149,6 @@ if ! [ -x "$(command -v composer)" ]; then
   php -r "if (hash_file('SHA384', 'composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
   sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 fi
-
 
 if ! [ -x "$(command -v zsh)" ]; then
     echo '##########  Instalando ZSH ############'
