@@ -31,6 +31,7 @@ then
     echo "Please, enter with you e-mail"
     read EMAIL_SSH
     ssh-keygen -t rsa -b 4096 -C "${EMAIL_SSH}"
+    #curl -d '{"title":"test key 2","key":"'"$(cat ~/.ssh/id_rsa.pub)"'"}' -H 'Content-Type: application/json' https://gitlab.com/api/v4/user/keys?private_token=<token_access>
 fi
 
 echo '##########  Instalando Dependencias ############'
