@@ -80,19 +80,24 @@ if [ $ADD_KEY == 1 ]
 
     if [ -z "$personal_access_token" ]
     then
-      echo "\$Token is empty. Please, access settings -> Access Tokens and create one token in you profile."
+      echo "Token is empty. Please, access settings -> Access Tokens and create one token in you profile."
     else
       curl -d '{"title":"Ubuntu","key":"'"$(cat ~/.ssh/id_rsa.pub)"'"}' -H 'Content-Type: application/json' ${gitlab_host}/api/v4/user/keys?private_token=${personal_access_token}
     fi
 
     echo ""
 
-    echo "\$Please, enter with email bitbucket"
+    echo "Please, enter with email bitbucket"
     read LOGIN_BITBUCKET
-    echo "\$Please, enter with username bitbucket"
+    echo "Please, enter with username bitbucket"
     read USERNAME_BITBUCKET
     read -s -p "Enter Password: " PASSWORD_BITBUCKET
     curl -u "${LOGIN_BITBUCKET}:${PASSWORD_BITBUCKET}" -X POST -H "Content-Type: application/json" -d '{"label":"Ubuntu","key":"'"$(cat ~/.ssh/id_rsa.pub)"'"}' https://api.bitbucket.org/2.0/users/${USERNAME_BITBUCKET}/ssh-keys
+    
+    #echo "Please, enter with user github"
+    #read USER_GITHUB
+    #read -s -p "Enter Password: " PASSWORD_GITHUB
+    #curl -u "${USER_GITHUB}:${PASSWORD_GITHUB}" --data '{"title":"Ubuntu","key":"'"$(cat ~/.ssh/id_rsa.pub)"'"}' https://api.github.com/user/keys
 fi
     
 echo ""
