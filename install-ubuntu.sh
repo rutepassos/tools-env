@@ -31,8 +31,63 @@ then
     echo "Please, enter with you e-mail"
     read EMAIL_SSH
     ssh-keygen -t rsa -b 4096 -C "${EMAIL_SSH}"
-    #curl -d '{"title":"test key 2","key":"'"$(cat ~/.ssh/id_rsa.pub)"'"}' -H 'Content-Type: application/json' https://gitlab.com/api/v4/user/keys?private_token=<token_access>
 fi
+
+echo ""
+echo "Add key in repository Gitlab Medlynx and Bitbucket? 1 - Yes or 2 - No"
+read ADD_KEY
+if [ $ADD_KEY == 1 ] 
+  then 
+    gitlab_host="https://desenv.medlynx.com.br/"
+
+    echo "Please, enter with user gitlab"
+    read USER_GITLAB
+    read -s -p "Enter Password: " PASSWORD_GITLAB
+
+    gitlab_user=$USER_GITLAB
+    gitlab_password=$PASSWORD_GITLAB
+    # 1. curl for the login page to get a session cookie and the sources with the auth tokens
+    body_header=$(curl -c cookies.txt -i "${gitlab_host}/users/sign_in" -s)
+
+    # grep the auth token for the user login for
+    #   not sure whether another token on the page will work, too - there are 3 of them
+    csrf_token=$(echo $body_header | perl -ne 'print "$1\n" if /new_user.*?authenticity_token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
+
+    # 2. send login credentials with curl, using cookies and token from previous request
+    curl -b cookies.txt -c cookies.txt -i "${gitlab_host}/users/sign_in" \
+      --data "user[login]=${gitlab_user}&user[password]=${gitlab_password}" \
+      --data-urlencode "authenticity_token=${csrf_token}"
+
+    # 3. send curl GET request to personal access token page to get auth token
+    body_header=$(curl -H 'user-agent: curl' -b cookies.txt -i "${gitlab_host}/profile/personal_access_tokens" -s)
+    csrf_token=$(echo $body_header | perl -ne 'print "$1\n" if /authenticity_token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
+
+    # 4. curl POST request to send the "generate personal access token form"
+    #      the response will be a redirect, so we have to follow using `-L`
+    body_header=$(curl -L -b cookies.txt "${gitlab_host}/profile/personal_access_tokens" \
+      --data-urlencode "authenticity_token=${csrf_token}" \
+      --data 'personal_access_token[name]=golab-generated&personal_access_token[expires_at]=&personal_access_token[scopes][]=api')
+
+    # 5. Scrape the personal access token from the response HTML
+    personal_access_token=$(echo $body_header | perl -ne 'print "$1\n" if /created-personal-access-token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
+
+    if [ -z "$personal_access_token" ]
+    then
+      echo "\$Token is empty. Please, access settings -> Access Tokens and create one token in you profile."
+    else
+      curl -d '{"title":"Ubuntu","key":"'"$(cat ~/.ssh/id_rsa.pub)"'"}' -H 'Content-Type: application/json' ${gitlab_host}/api/v4/user/keys?private_token=${personal_access_token}
+    fi
+
+    echo ""
+
+    echo "\$Please, enter with email bitbucket"
+    read LOGIN_BITBUCKET
+    echo "\$Please, enter with username bitbucket"
+    read USERNAME_BITBUCKET
+    read -s -p "Enter Password: " PASSWORD_BITBUCKET
+    curl -u "${LOGIN_BITBUCKET}:${PASSWORD_BITBUCKET}" -X POST -H "Content-Type: application/json" -d '{"label":"Ubuntu","key":"'"$(cat ~/.ssh/id_rsa.pub)"'"}' https://api.bitbucket.org/2.0/users/${USERNAME_BITBUCKET}/ssh-keys
+fi
+    
 
 echo '##########  Instalando Dependencias ############'
 sudo apt-get install -y \
