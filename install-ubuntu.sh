@@ -3,10 +3,14 @@
 echo '##########  Executando Update ############'
 sudo apt-get update
 
+echo ""
+
 if ! [ -x "$(command -v git)" ]; then
   echo '##########  Instalando Git ############'
   sudo apt-get install git -y
 fi
+
+echo ""
 
 if [ -x "$(command -v git)" ]; then
   echo 'Add config global git? 1 - Yes or 2 - No'
@@ -23,6 +27,8 @@ if [ -x "$(command -v git)" ]; then
   fi
 fi
 
+echo ""
+
 echo "Generate ssh key? 1 - Yes or 2 - No"
 read KEY_SSH
 
@@ -34,6 +40,7 @@ then
 fi
 
 echo ""
+
 echo "Add key in repository Gitlab Medlynx and Bitbucket? 1 - Yes or 2 - No"
 read ADD_KEY
 if [ $ADD_KEY == 1 ] 
@@ -88,6 +95,7 @@ if [ $ADD_KEY == 1 ]
     curl -u "${LOGIN_BITBUCKET}:${PASSWORD_BITBUCKET}" -X POST -H "Content-Type: application/json" -d '{"label":"Ubuntu","key":"'"$(cat ~/.ssh/id_rsa.pub)"'"}' https://api.bitbucket.org/2.0/users/${USERNAME_BITBUCKET}/ssh-keys
 fi
     
+echo ""
 
 echo '##########  Instalando Dependencias ############'
 sudo apt-get install -y \
@@ -116,7 +124,7 @@ if ! [ -x "$(command -v subl)" ]; then
     curl -fsSL https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
     sudo add-apt-repository "deb https://download.sublimetext.com/ apt/stable/"
     sudo apt-get update
-    sudo apt-get install sublime-text
+    sudo apt-get install sublime-text -y
 #     # Abrir sublime pelo terminal
 #     #sudo ln -s /opt/sublime/sublime_text /usr/bin/subl
 fi
