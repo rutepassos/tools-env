@@ -109,6 +109,11 @@ sudo apt-get install -y \
     curl \
     software-properties-common
 
+############# Medclientes Dependeincies #################
+#sudo apt install -y python-pip
+#sudo apt install -y python-gtk2 python-gtk2-dev
+#sudo apt-get install -y libpcap-dev libpq-dev
+
 if ! [ -x "$(command -v vim)" ]; then
   echo '##########  Install Vim ############'
   sudo apt-get install vim -y
