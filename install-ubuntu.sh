@@ -172,6 +172,11 @@ if ! [ -x "$(command -v filezilla)" ]; then
   sudo apt-get install filezilla -y
 fi
 
+if ! [ -x "$(command -v pidgin)" ]; then
+  echo '##########  Install Pidgin ############'
+  sudo apt install -y pidgin
+fi
+
 # if ! [ -x "$(command -v mysql-workbench)" ]; then
 #     echo '##########  Install Mysql Workbench ############'
 #     sudo apt install mysql-workbench
