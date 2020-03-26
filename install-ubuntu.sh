@@ -141,12 +141,12 @@ fi
 
 if ! [ -x "$(command -v insomnia)" ]; then
     echo '##########  Install Insomnia ############'
-    sudo snap install -y insomnia
+    sudo snap install insomnia
 fi
 
 if ! [ -x "$(command -v discord)" ]; then
     echo '##########  Install Discord ############'
-    sudo snap install -y discord
+    sudo snap install discord
 fi
 
 if ! [ -x "$(command -v psql)" ]; then
