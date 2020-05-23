@@ -202,8 +202,7 @@ fi
 
 #if ! [ -x "$(command -v gitkraken)" ]; then
     #echo '##########  Install Git Kraken ############'
-    #wget https://release.gitkraken.com/linux/gitkraken-amd64.deb
-    #dpkg -i gitkraken-amd64.deb
+    #sudo snap install gitkraken --classic
 #fi
 
 if ! [ -x "$(command -v docker)" ]; then
