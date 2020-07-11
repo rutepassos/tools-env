@@ -129,6 +129,11 @@ if ! [ -x "$(command -v code)" ]; then
   sudo snap install --classic code
 fi
 
+#if ! [ -x "$(command -v htop)" ]; then
+  #echo '##########  Install htop ############'
+  #sudo snap install htop
+#fi
+
 if ! [ -x "$(command -v subl)" ]; then
     echo '##########  Install Sublime ############'
     curl -fsSL https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
