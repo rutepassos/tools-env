@@ -41,11 +41,14 @@ fi
 
 echo ""
 
-echo "Add key in repository Gitlab Medlynx and Bitbucket? 1 - Yes or 2 - No"
-read ADD_KEY
-if [ $ADD_KEY == 1 ] 
+echo "Add key in repository Gitlab? 1 - Yes or 2 - No"
+read ADD_KEY_MEDLYNX
+if [ $ADD_KEY_MEDLYNX == 1 ] 
   then 
-    gitlab_host="https://desenv.medlynx.com.br/"
+    echo "Please, enter with URL Gitlab or press enter empty for Medlynx"
+    read URL_GITLAB
+    
+    if [ $URL_GITLAB ]; then gitlab_host=$URL_GITLAB; else gitlab_host="https://desenv.medlynx.com.br/"; fi
 
     echo "Please, enter with user gitlab"
     read USER_GITLAB
@@ -77,30 +80,58 @@ if [ $ADD_KEY == 1 ]
 
     # 5. Scrape the personal access token from the response HTML
     personal_access_token=$(echo $body_header | perl -ne 'print "$1\n" if /created-personal-access-token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
-
+    
     if [ -z "$personal_access_token" ]
     then
+      echo ""
+      echo ""
       echo "Token is empty. Please, access settings -> Access Tokens and create one token in you profile."
+      echo ""
+      echo ""
     else
-      curl -d '{"title":"Ubuntu","key":"'"$(cat ~/.ssh/id_rsa.pub)"'"}' -H 'Content-Type: application/json' ${gitlab_host}/api/v4/user/keys?private_token=${personal_access_token}
+      curl -d '{"title":"'"$(date +'%Y-%m-%d %T')"'","key":"'"$(cat ~/.ssh/id_rsa.pub)"'"}' -H 'Content-Type: application/json' ${gitlab_host}/api/v4/user/keys?private_token=${personal_access_token}
     fi
+fi
 
-    echo ""
+echo ""
+echo ""
+echo ""
+echo ""
 
+echo "Add key in repository Bitbucket? 1 - Yes or 2 - No"
+read KEY_SSH_BITBUCKET
+
+if [ $KEY_SSH_BITBUCKET == 1 ] 
+then 
     echo "Please, enter with email bitbucket"
     read LOGIN_BITBUCKET
     echo "Please, enter with username bitbucket"
     read USERNAME_BITBUCKET
     read -s -p "Enter Password: " PASSWORD_BITBUCKET
-    curl -u "${LOGIN_BITBUCKET}:${PASSWORD_BITBUCKET}" -X POST -H "Content-Type: application/json" -d '{"label":"Ubuntu","key":"'"$(cat ~/.ssh/id_rsa.pub)"'"}' https://api.bitbucket.org/2.0/users/${USERNAME_BITBUCKET}/ssh-keys
-    
-    #echo "Please, enter with user github"
-    #read USER_GITHUB
-    #read -s -p "Enter Password: " PASSWORD_GITHUB
-    #curl -u "${USER_GITHUB}:${PASSWORD_GITHUB}" --data '{"title":"Ubuntu","key":"'"$(cat ~/.ssh/id_rsa.pub)"'"}' https://api.github.com/user/keys
+    curl -u "${LOGIN_BITBUCKET}:${PASSWORD_BITBUCKET}" -X POST -H "Content-Type: application/json" -d '{"label":"'"$(date +'%Y-%m-%d %T')"'","key":"'"$(cat ~/.ssh/id_rsa.pub)"'"}' https://api.bitbucket.org/2.0/users/${USERNAME_BITBUCKET}/ssh-keys
 fi
-    
+
 echo ""
+echo ""
+echo ""
+echo ""
+
+echo "Add key in repository Github? 1 - Yes or 2 - No"
+read KEY_SSH_GITHUB
+
+if [ $KEY_SSH_GITHUB == 1 ] 
+then 
+  echo "Please, enter with user github"
+  read USER_GITHUB
+  read -s -p "Enter Password: " PASSWORD_GITHUB
+  curl -u "${USER_GITHUB}:${PASSWORD_GITHUB}" --data '{"title":"'"$(date +'%Y-%m-%d %T')"'","key":"'"$(cat ~/.ssh/id_rsa.pub)"'"}' https://api.github.com/user/keys
+fi
+
+echo ""
+echo ""
+echo ""
+echo ""
+    
 
 echo '##########  Install Dependencies ############'
 sudo apt-get install -y \
