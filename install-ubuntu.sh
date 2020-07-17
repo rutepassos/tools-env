@@ -3,14 +3,16 @@
 echo '##########  Exec Update ############'
 sudo apt-get update
 
-echo ""
+printf "\n"
+printf "\n"
 
 if ! [ -x "$(command -v git)" ]; then
   echo '##########  Install Git ############'
   sudo apt-get install git -y
 fi
 
-echo ""
+printf "\n"
+printf "\n"
 
 if [ -x "$(command -v git)" ]; then
   echo 'Add config global git? 1 - Yes or 2 - No'
@@ -27,7 +29,8 @@ if [ -x "$(command -v git)" ]; then
   fi
 fi
 
-echo ""
+printf "\n"
+printf "\n"
 
 echo "Generate ssh key? 1 - Yes or 2 - No"
 read KEY_SSH
@@ -39,7 +42,8 @@ then
     ssh-keygen -t rsa -b 4096 -C "${EMAIL_SSH}"
 fi
 
-echo ""
+printf "\n"
+printf "\n"
 
 echo "Add key in repository Gitlab? 1 - Yes or 2 - No"
 read ADD_KEY_MEDLYNX
@@ -83,20 +87,18 @@ if [ $ADD_KEY_MEDLYNX == 1 ]
     
     if [ -z "$personal_access_token" ]
     then
-      echo ""
-      echo ""
+      printf "\n"
+      printf "\n"
+      printf "\n"
       echo "Token is empty. Please, access settings -> Access Tokens and create one token in you profile."
-      echo ""
-      echo ""
     else
       curl -d '{"title":"'"$(date +'%Y-%m-%d %T')"'","key":"'"$(cat ~/.ssh/id_rsa.pub)"'"}' -H 'Content-Type: application/json' ${gitlab_host}/api/v4/user/keys?private_token=${personal_access_token}
     fi
 fi
 
-echo ""
-echo ""
-echo ""
-echo ""
+printf "\n"
+printf "\n"
+printf "\n"
 
 echo "Add key in repository Bitbucket? 1 - Yes or 2 - No"
 read KEY_SSH_BITBUCKET
@@ -111,10 +113,9 @@ then
     curl -u "${LOGIN_BITBUCKET}:${PASSWORD_BITBUCKET}" -X POST -H "Content-Type: application/json" -d '{"label":"'"$(date +'%Y-%m-%d %T')"'","key":"'"$(cat ~/.ssh/id_rsa.pub)"'"}' https://api.bitbucket.org/2.0/users/${USERNAME_BITBUCKET}/ssh-keys
 fi
 
-echo ""
-echo ""
-echo ""
-echo ""
+printf "\n"
+printf "\n"
+printf "\n"
 
 echo "Add key in repository Github? 1 - Yes or 2 - No"
 read KEY_SSH_GITHUB
@@ -127,11 +128,9 @@ then
   curl -u "${USER_GITHUB}:${PASSWORD_GITHUB}" --data '{"title":"'"$(date +'%Y-%m-%d %T')"'","key":"'"$(cat ~/.ssh/id_rsa.pub)"'"}' https://api.github.com/user/keys
 fi
 
-echo ""
-echo ""
-echo ""
-echo ""
-    
+printf "\n"
+printf "\n"
+printf "\n"
 
 echo '##########  Install Dependencies ############'
 sudo apt-get install -y \
@@ -140,30 +139,41 @@ sudo apt-get install -y \
     curl \
     software-properties-common
 
+printf "\n"
+printf "\n"
+
 ############# Medclientes Dependeincies #################
 #sudo apt install -y python-pip
 #sudo apt install -y python-gtk2 python-gtk2-dev
 #sudo apt-get install -y libpcap-dev libpq-dev
+
+#printf "\n"
+#printf "\n"
+
 
 if ! [ -x "$(command -v vim)" ]; then
   echo '##########  Install Vim ############'
   sudo apt-get install vim -y
 fi
 
+printf "\n"
+printf "\n"
+
 if ! [ -x "$(command -v snap)" ]; then
   echo '##########  Install Snap ############'
   sudo apt-get install snapd -y
 fi
+
+printf "\n"
+printf "\n"
 
 if ! [ -x "$(command -v code)" ]; then
   echo '##########  Install VSCODE ############'
   sudo snap install --classic code
 fi
 
-#if ! [ -x "$(command -v htop)" ]; then
-  #echo '##########  Install htop ############'
-  #sudo snap install htop
-#fi
+printf "\n"
+printf "\n"
 
 if ! [ -x "$(command -v subl)" ]; then
     echo '##########  Install Sublime ############'
@@ -171,34 +181,50 @@ if ! [ -x "$(command -v subl)" ]; then
     sudo add-apt-repository "deb https://download.sublimetext.com/ apt/stable/"
     sudo apt-get update
     sudo apt-get install sublime-text -y
-#     # Abrir sublime pelo terminal
-#     #sudo ln -s /opt/sublime/sublime_text /usr/bin/subl
 fi
+
+printf "\n"
+printf "\n"
 
 if ! [ -x "$(command -v insomnia)" ]; then
     echo '##########  Install Insomnia ############'
     sudo snap install insomnia
 fi
 
+printf "\n"
+printf "\n"
+
 if ! [ -x "$(command -v discord)" ]; then
     echo '##########  Install Discord ############'
     sudo snap install discord
 fi
+
+printf "\n"
+printf "\n"
 
 if ! [ -x "$(command -v psql)" ]; then
     echo '##########  Install Postgres Client ############'
     sudo apt-get install postgresql-contrib -y
 fi
 
+printf "\n"
+printf "\n"
+
 if ! [ -x "$(command -v node)" ]; then
   echo '##########  Install Node ############'
   sudo apt-get install nodejs -y
 fi
 
+printf "\n"
+printf "\n"
+
 if ! [ -x "$(command -v npm)" ]; then
   echo '##########  Install NPM ############'
   sudo apt install npm -y
 fi
+
+printf "\n"
+printf "\n"
 
 if ! [ -x "$(command -v yarn)" ]; then
     echo '##########  Install Yarn ############'
@@ -207,32 +233,40 @@ if ! [ -x "$(command -v yarn)" ]; then
     sudo apt-get update && sudo apt-get install --no-install-recommends yarn -y
 fi
 
+printf "\n"
+printf "\n"
 
 if ! [ -x "$(command -v filezilla)" ]; then
   echo '##########  Install Filezilla ############'
   sudo apt-get install filezilla -y
 fi
 
-if ! [ -x "$(command -v pidgin)" ]; then
-  echo '##########  Install Pidgin ############'
-  sudo apt install -y pidgin
-fi
+printf "\n"
+printf "\n"
 
 # if ! [ -x "$(command -v mysql-workbench)" ]; then
 #     echo '##########  Install Mysql Workbench ############'
 #     sudo apt install mysql-workbench
 # fi
 
+# printf "\n"
+# printf "\n"
 
-# client mongo terminal
-#wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
-#sudo apt-get install gnupg -y
-#wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
-#echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
-#sudo apt-get update
-#sudo apt-get install -y mongodb-org-shell
+# Mongo Client Terminal
+#if ! [ -x "$(command -v mongo)" ]; then
+    #echo '##########  Install Mongo Shell ############'
+    #wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+    #sudo apt-get install gnupg -y
+    #wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+    #echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+    #sudo apt-get update
+    #sudo apt-get install -y mongodb-org-shell
+#fi
 
-# cliente mongo gui
+# printf "\n"
+# printf "\n"
+
+# Mongo Client GUI
 #wget https://downloads.mongodb.com/compass/mongodb-compass_1.15.1_amd64.deb
 #sudo dpkg -i mongodb-compass_1.15.1_amd64.deb
 
@@ -260,6 +294,9 @@ if ! [ -x "$(command -v docker)" ]; then
     sudo systemctl enable docker
 fi
 
+printf "\n"
+printf "\n"
+
 if ! [ -x "$(command -v composer)" ]; then
   echo '##########  Install Composer ############'
   sudo apt install php-cli php-xml php-gd php-curl php-pgsql php-mysql php-zip  php-mbstring unzip -y
@@ -268,6 +305,9 @@ if ! [ -x "$(command -v composer)" ]; then
   php -r "if (hash_file('SHA384', 'composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
   sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 fi
+
+printf "\n"
+printf "\n"
 
 if ! [ -x "$(command -v zsh)" ]; then
     echo '##########  Install ZSH ############'
@@ -280,4 +320,7 @@ if ! [ -x "$(command -v zsh)" ]; then
     #sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
 fi
 
-echo '##########  Reboot the machine ############'
+printf "\n"
+printf "\n"
+
+echo '##########  Reboot the Machine ############'
