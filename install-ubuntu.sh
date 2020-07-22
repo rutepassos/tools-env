@@ -1,5 +1,18 @@
 #!/bin/bash
 
+printf "\n"
+
+echo "\e[31mATTENTION: PLEASE, AFTER ENDING INSTALLATION REBOOT THE MACHINE!!!\e[0m"
+
+printf "\n"
+
+echo "\e[32mSTARTING INSTALATION IN 10s....\e[0m"
+
+printf "\n"
+
+sleep 10s
+
+
 echo '##########  Exec Update ############'
 sudo apt-get update
 
@@ -320,7 +333,7 @@ if ! [ -x "$(command -v zsh)" ]; then
     #sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
 fi
 
-printf "\n"
-printf "\n"
+if ! [ -x "$(command -v docker)" ]; then
+  reboot
+fi
 
-echo '##########  Reboot the Machine ############'
