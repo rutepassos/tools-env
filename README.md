@@ -12,11 +12,17 @@ sudo chmod +x install-ubuntu.sh
 
 ## Config Git
 
-#### Change Editor Config Git
+#### Editor
+
+For change editor:
 
 ```
 git config --global core.editor code
+```
 
+For open file of config:
+
+```
 git config --global --edit
 
 ```
@@ -30,7 +36,7 @@ The last command opening file of config git with vscode, so in line
 
 ```
 
-#### Alias Git
+#### Alias
 
 The alias are commands small for git, this help in productivity. For create alias add line [alias]. Ex:
 
