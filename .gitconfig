@@ -1,13 +1,13 @@
 [user]
-	name = "Your name"
-	email = "Your e-mail"
+  name = "Your name"
+  email = "Your e-mail"
 [code]
-	editor = code
+  editor = code
 [core]
-	editor = code --wait
+  editor = code --wait
 [alias]
   s = !git status -s
-	c = !git add --all && git commit -m
-	l = !git log --date=format:'%d/%m/%Y %H:%M:%S' --pretty=format:'%C(blue)%h%C(red)%d %C(white)%s - %C(cyan)%cn, %C(green)%ad'
-	psb = !git push origin
-	plb = !git pull origin
+  c = !git add --all && git commit -m
+  l = !git log --date=format:'%d/%m/%Y %H:%M:%S' --pretty=format:'%C(blue)%h%C(red)%d %C(white)%s - %C(cyan)%cn, %C(green)%ad'
+  psb = !git push origin
+  plb = !git pull origin
