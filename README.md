@@ -3,7 +3,7 @@
 - Open you terminal
 - Execute:
 
-```bash
+```
 cd tools-env
 sudo chmod +x install-ubuntu.sh
 ./install-ubuntu.sh
