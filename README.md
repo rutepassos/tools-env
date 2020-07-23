@@ -1,8 +1,14 @@
-## Quick start
+## Execute Script
 
 - Open you terminal
-- `cd tools-env`
-- `./install-ubuntu.sh`
+- Execute:
+
+```
+cd tools-env
+sudo chmod +x install-ubuntu.sh
+./install-ubuntu.sh
+
+```
 
 ## Config Git
 
