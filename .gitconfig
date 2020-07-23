@@ -11,3 +11,6 @@
   l = !git log --date=format:'%d/%m/%Y %H:%M:%S' --pretty=format:'%C(blue)%h%C(red)%d %C(white)%s - %C(cyan)%cn, %C(green)%ad'
   psb = !git push origin
   plb = !git pull origin
+	cb = !git checkout -b
+	chb = !git checkout
+	db = !git branch -d
