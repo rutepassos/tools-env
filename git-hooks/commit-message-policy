@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+message_file = ARGV[0]
+message = File.read(message_file)
+$regex = /^\d{4,}\-{1}*\w*\s\-\s\w/
+if !$regex.match(message)
+  puts "\n"
+  puts "[POLICY] Your message is not formatted correctly"
+  puts "1 - Your message should be started with number branch min 4 digits"
+  puts "2 - Your message should be in the format: branch - commit message"
+  puts "\n"
+  exit 1
+end
