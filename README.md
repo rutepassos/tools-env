@@ -56,7 +56,9 @@ git l
 
 ```
 
-### Hook Message Commit Policy With Husky
+## Hook Message Commit Policy
+
+### Husky
 
 #### Ruby
 
@@ -90,5 +92,16 @@ Change in file package.json
 ```
 yarn install
 sudo chmod +x git-hooks/commit-message-policy2
+
+```
+
+### Git
+
+```
+cd path/your_repository_git
+
+# Copy content in git-hooks/commit-message-policy or git-hooks/commit-message-policy2 in the file:
+vim .git/hooks/commit-msg
+
 
 ```
