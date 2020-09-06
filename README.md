@@ -68,7 +68,7 @@ vim .git/hooks/commit-msg
 
 ```
 
-### Mode 1: Using Library Husky to Execute Script
+### Mode 2: Using Library Husky to Execute Script
 
 #### Script in Ruby
 
