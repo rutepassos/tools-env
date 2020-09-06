@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 message_file = ARGV[0]
 message = File.read(message_file)
-$regex = /(^\d{4,}|^\d{4,}\(\w{3,}\))\s-\s\w+/
+$regex = /(^\d{4,}|^\d{4,}\(\w{3,}\)):\s\w+/
 if !$regex.match(message)
   puts "\n"
   puts "[POLICY] Your message is not formatted correctly"
