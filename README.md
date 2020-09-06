@@ -56,7 +56,9 @@ git l
 
 ```
 
-### Hook Message Commit With Husky
+### Hook Message Commit Policy With Husky
+
+#### Ruby
 
 Script hook is in ruby, for install ruby:
 
@@ -65,9 +67,28 @@ gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703
 \curl -sSL https://get.rvm.io | bash -s stable --ruby
 source ~/.rvm/scripts/rvm
 reboot
+
+```
+
+```
+
+yarn install
+sudo chmod +x git-hooks/commit-message-policy
+
+```
+
+#### Bash
+
+Change in file package.json
+
+```
+"hooks": {
+  "commit-msg": "git-hooks/commit-message-policy2 ${HUSKY_GIT_PARAMS}"
+}
 ```
 
 ```
 yarn install
-sudo chmod +x git-hooks/commit-message-policy
+sudo chmod +x git-hooks/commit-message-policy2
+
 ```
