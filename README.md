@@ -10,7 +10,7 @@ sudo chmod +x install-ubuntu.sh
 
 ```
 
-## Config Git
+## Configuration Git
 
 #### Editor
 
@@ -58,9 +58,19 @@ git l
 
 ## Hook Message Commit Policy
 
-### Husky
+### Mode 1: Using Configuration Inside Repository Git
 
-#### Ruby
+```
+cd path/your_repository_git
+
+# Copy content in git-hooks/commit-message-policy or git-hooks/commit-message-policy2 in the file:
+vim .git/hooks/commit-msg
+
+```
+
+### Mode 1: Using Library Husky to Execute Script
+
+#### Script in Ruby
 
 Script hook is in ruby, for install ruby:
 
@@ -79,7 +89,7 @@ sudo chmod +x git-hooks/commit-message-policy
 
 ```
 
-#### Bash
+#### Script in Bash
 
 Change in file package.json
 
@@ -92,16 +102,5 @@ Change in file package.json
 ```
 yarn install
 sudo chmod +x git-hooks/commit-message-policy2
-
-```
-
-### Git
-
-```
-cd path/your_repository_git
-
-# Copy content in git-hooks/commit-message-policy or git-hooks/commit-message-policy2 in the file:
-vim .git/hooks/commit-msg
-
 
 ```
