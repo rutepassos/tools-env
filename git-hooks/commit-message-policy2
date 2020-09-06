@@ -1,14 +1,16 @@
 #!/bin/bash
 MSG_FILE=$1
 FILE_CONTENT="$(cat $MSG_FILE)"
-# Initialize constants here
-export REGEX='^(DE[0-9]+:|US[0-9]+|Merge) .+'
-export ERROR_MSG="Commit message format must match regex \"${REGEX}\""
-if [[ $FILE_CONTENT =~ $REGEX ]]; then
- echo "Good commit!"
-else
-  echo "Bad commit \"$FILE_CONTENT\""
- echo $ERROR_MSG
- exit 1
+
+REGEX="(^[0-9]{4,}|^[0-9]{4,}\(\w{3,}\)):\s\w+"
+
+if [[ !($FILE_CONTENT =~ $REGEX) ]]; then
+  echo ""
+  echo "[POLICY] Your message is not formatted correctly"
+  echo "Your message should be started with number branch min 4 digits"
+  echo "Your message should be in the formats:"
+  echo "  1 - branch: commit message"
+  echo "  2 - branch(chore/fix/refactor/test/doc): commit message"
+  echo ""
+  exit 1
 fi
-exit 0
