@@ -62,7 +62,7 @@ git l
 
 ```
 cd path/your_repository_git
-
+cp .git/hooks/commit-msg.sample .git/hooks/commit-msg
 # Copy content in git-hooks/commit-message-policy or git-hooks/commit-message-policy2 in the file:
 vim .git/hooks/commit-msg
 
