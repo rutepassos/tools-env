@@ -5,7 +5,7 @@
   "license": "MIT",
   "husky": {
     "hooks": {
-      "commit-msg": "git-hooks/commit-message-policy ${HUSKY_GIT_PARAMS}"
+      "commit-msg": "git-hooks/commit-message-policy2 ${HUSKY_GIT_PARAMS}"
     }
   },
   "devDependencies": {
