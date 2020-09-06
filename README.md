@@ -58,6 +58,8 @@ git l
 
 ## Hook Message Commit Policy
 
+This is a simple example how create hooks git, you can create own hooks.
+
 ### Mode 1: Using Configuration Inside Repository Git
 
 ```
