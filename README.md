@@ -69,5 +69,5 @@ reboot
 
 ```
 yarn install
-
+sudo chmod +x git-hooks/commit-message-policy
 ```
