@@ -59,13 +59,19 @@ printf "\n"
 printf "\n"
 
 echo "Add key in repository Gitlab? 1 - Yes or 2 - No"
-read ADD_KEY_MEDLYNX
-if [ $ADD_KEY_MEDLYNX == 1 ] 
+read ADD_KEY_REPO
+if [ $ADD_KEY_REPO == 1 ] 
   then 
-    echo "Please, enter with URL Gitlab or press enter empty for Medlynx"
+    echo "Please, enter with URL Gitlab"
     read URL_GITLAB
     
-    if [ $URL_GITLAB ]; then gitlab_host=$URL_GITLAB; else gitlab_host="https://desenv.medlynx.com.br/"; fi
+    if [ -z $URL_GITLAB ]
+    then
+      echo "URL Gitlab can't be empty";
+      exit 1
+    else 
+      gitlab_host=$URL_GITLAB;
+    fi
 
     echo "Please, enter with user gitlab"
     read USER_GITLAB
@@ -103,7 +109,8 @@ if [ $ADD_KEY_MEDLYNX == 1 ]
       printf "\n"
       printf "\n"
       printf "\n"
-      echo "Token is empty. Please, access settings -> Access Tokens and create one token in you profile."
+      echo "Token is empty. Please, access settings -> Access Tokens and create one token in you profile and try again."
+      exit 1
     else
       curl -d '{"title":"'"$(date +'%Y-%m-%d %T')"'","key":"'"$(cat ~/.ssh/id_rsa.pub)"'"}' -H 'Content-Type: application/json' ${gitlab_host}/api/v4/user/keys?private_token=${personal_access_token}
     fi
@@ -154,14 +161,6 @@ sudo apt-get install -y \
 
 printf "\n"
 printf "\n"
-
-############# Medclientes Dependeincies #################
-#sudo apt install -y python-pip
-#sudo apt install -y python-gtk2 python-gtk2-dev
-#sudo apt-get install -y libpcap-dev libpq-dev
-
-#printf "\n"
-#printf "\n"
 
 
 if ! [ -x "$(command -v vim)" ]; then
@@ -257,36 +256,6 @@ fi
 printf "\n"
 printf "\n"
 
-# if ! [ -x "$(command -v mysql-workbench)" ]; then
-#     echo '##########  Install Mysql Workbench ############'
-#     sudo apt install mysql-workbench
-# fi
-
-# printf "\n"
-# printf "\n"
-
-# Mongo Client Terminal
-#if ! [ -x "$(command -v mongo)" ]; then
-    #echo '##########  Install Mongo Shell ############'
-    #wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
-    #sudo apt-get install gnupg -y
-    #wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
-    #echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
-    #sudo apt-get update
-    #sudo apt-get install -y mongodb-org-shell
-#fi
-
-# printf "\n"
-# printf "\n"
-
-# Mongo Client GUI
-#wget https://downloads.mongodb.com/compass/mongodb-compass_1.15.1_amd64.deb
-#sudo dpkg -i mongodb-compass_1.15.1_amd64.deb
-
-#if ! [ -x "$(command -v gitkraken)" ]; then
-    #echo '##########  Install Git Kraken ############'
-    #sudo snap install gitkraken --classic
-#fi
 
 if ! [ -x "$(command -v docker)" ]; then
     
@@ -319,22 +288,6 @@ if ! [ -x "$(command -v composer)" ]; then
   sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 fi
 
-#printf "\n"
-#printf "\n"
-
-#if ! [ -x "$(command -v tableplus)" ]; then
-  #echo '##########  Install Table Plus ############'
-  # Add TablePlus gpg key
-    #wget -O - -q http://deb.tableplus.com/apt.tableplus.com.gpg.key | sudo apt-key add - 
-
-    # Add TablePlus repo
-    #sudo add-apt-repository "deb [arch=amd64] https://deb.tableplus.com/debian tableplus main"
-
-    # Install
-    #sudo apt update
-    #sudo apt install tableplus -y
-#fi
-
 printf "\n"
 printf "\n"
 
@@ -344,9 +297,6 @@ if ! [ -x "$(command -v zsh)" ]; then
 
     echo '##########  Install Oh my zsh ############'
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
-    #echo '##########  Install Plugin ZPLUGIN ############'
-    #sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
 fi
 
 if ! [ -x "$(command -v docker)" ]; then
